@@ -20,15 +20,23 @@ class SubmissionController extends Controller
      */
     public function create()
     {
-        return Inertia::render('Submission/Create');
+        return Inertia::render('Submission/Create',['step' => 1]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store personal information a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store_personal_information(Request $request)
     {
-        //
+        return Inertia::render('Submission/Create', ['step' => 2]);
+    }
+
+    /**
+     * Store diplomas information a newly created resource in storage.
+     */
+    public function store_diplomas_information(Request $request)
+    {
+        return Inertia::render('Submission/Create', ['step' => 3]);
     }
 
     /**

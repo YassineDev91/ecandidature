@@ -15,21 +15,23 @@ const phase = {
     required_semesters: 4
 }
 
-const diplomas = reactive([
-    {
-        title: '',
-        type: 'BAC',
-        grade: '',
-        year: ''
-    },
-    {
-        title: '',
-        type: 'BAC+2',
-        grade: '',
-        year: ''
-    },
+const form = useForm({
+    'diplomas': [
+        {
+            title: '',
+            type: 'BAC',
+            grade: '',
+            year: ''
+        },
+        {
+            title: '',
+            type: 'BAC+2',
+            grade: '',
+            year: ''
+        },
 
-]);
+    ]
+});
 
 </script>
 
@@ -41,9 +43,9 @@ const diplomas = reactive([
                 Enter your Diplomas information
             </p>
         </header>
-        <form @submit.prevent="form.patch(route('submission.diplomas_information'))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.post(route('submission.diplomas_information'))" class="mt-6 space-y-6">
 
-            <div class="mt-2 space-y-6" v-for="diploma in diplomas" :key="diploma.title">
+            <div class="mt-2 space-y-6" v-for="diploma in form.diplomas" :key="diploma.title">
                 <p class="text-sm underline">{{ diploma.type }} information</p>
                 <div>
                     <InputLabel for="title" value="Title" />
@@ -54,10 +56,12 @@ const diplomas = reactive([
                         <option value="SP3">SP3</option>
                         <option value="other">other</option>
                     </select>
-                    <TextInput type="text" class="mt-1 block w-full" v-model="diploma.title"
-                        v-if="diploma.title == 'other'" value="" autofocus />                </div>
-
-                <div>
+                    <TextInput type="text" class="mt-1 block w-full" v-model="diploma.title" v-if="diploma.title == 'other'"
+                        value="" autofocus />
+                </div>
+                
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="col-span-2">
                     <InputLabel for="grade" value="Grade" />
                     <select v-model="diploma.grade"
                         class="mt-1 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm block w-full">
@@ -68,11 +72,23 @@ const diplomas = reactive([
                     </select>
                 </div>
 
-                <div>
+                <div class="col mt-1">
                     <InputLabel for="year" value="Year" />
-                    <TextInput type="number" min="1990" :max="new Date().getFullYear()" v-model="diploma.year" />
+                    <TextInput type="number" min="1990" :max="new Date().getFullYear()" v-model="diploma.year"  class="w-full"/>
                 </div>
+                </div>
+                
+
+                
             </div>
+            <div class="flex items-center gap-4">
+                    <PrimaryButton :disabled="form.processing">Next -></PrimaryButton>
+
+                    <Transition enter-active-class="transition ease-in-out" enter-from-class="opacity-0"
+                        leave-active-class="transition ease-in-out" leave-to-class="opacity-0">
+                        <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Next</p>
+                    </Transition>
+                </div>
         </form>
     </section>
 </template>

@@ -29,7 +29,7 @@ const form = useForm({
             </p>
         </header>
 
-        <form @submit.prevent="form.patch(route('submission.personal_information'))" class="mt-6 space-y-6">
+        <form @submit.prevent="form.post(route('submission.personal_information'))" class="mt-6 space-y-6">
 
             <div class="mt-2 space-y-6">
                 <InputLabel for="gender" value="Gender" />
@@ -110,7 +110,7 @@ const form = useForm({
                     leave-active-class="transition ease-in-out"
                     leave-to-class="opacity-0"
                 >
-                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Next -></p>
+                    <p v-if="form.recentlySuccessful" class="text-sm text-gray-600">Next</p>
                 </Transition>
             </div>
         </div>

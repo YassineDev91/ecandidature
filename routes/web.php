@@ -37,6 +37,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/submission',[SubmissionController::class,'create'])->name('submission.create.personalInformation');
+    Route::post('/personalInformations',[SubmissionController::class, 'store_personal_information'])->name('submission.personal_information');
+    Route::post('/diplomasInformation',[SubmissionController::class, 'store_diplomas_information'])->name('submission.diplomas_information');
+    // Route::post('/scoresInformation',[SubmissionController::class, 'store_scores_information'])->name('submission.scores_information');
 
 });
 

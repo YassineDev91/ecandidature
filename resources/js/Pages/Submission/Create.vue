@@ -7,7 +7,6 @@ import ScoreInformation from '@/Pages/Submission/Partials/ScoreInformation.vue'
 import Steps from '@/Pages/Submission/Partials/Steps.vue'
 import { ref } from 'vue';
 
-const step = ref(1);
 
 </script>
 <template>
@@ -15,22 +14,23 @@ const step = ref(1);
     <AuthenticatedLayout>
         <template #header>
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">Submission</h2>
+
         </template>
         <div class="py-12">
             <div class="py-5 max-w-6xl mx-auto sm:px-6 lg:px-8 ">
-                <Steps :step="step"></Steps>
+                <Steps :step="$page.props.step"></Steps>
             </div>
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y6">
 
-                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg" v-if="step == 1">
+                <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg" v-if="$page.props.step == 1">
                     <PersonalInformation class="max-w-xl"></PersonalInformation>
                 </div>
 
-                <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg" v-if="step == 2">
+                <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg" v-if="$page.props.step == 2">
                     <DiplomaInformation class="max-w-xl"></DiplomaInformation>
                 </div>
 
-                <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg" v-if="step == 3">
+                <div class="mb-4 p-4 sm:p-8 bg-white shadow sm:rounded-lg" v-if="$page.props.step == 3">
                     <ScoreInformation></ScoreInformation>
                 </div>
 
